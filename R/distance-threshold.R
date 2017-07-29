@@ -58,16 +58,16 @@ fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window
   resid2 <- as.numeric(y2 - y2smooth)
   
   ##Plot the decompositions
-  d1 <- ggplot2::ggplot() + xlab("Index") + ylab("Depth") + ggtitle("Normalized Mark Decomposition") + 
-    geom_line(aes(x = 1:length(y1), y = y1+15), size = 1) + 
-    geom_line(aes(x = (1:length(y1smooth)), y = y1smooth - 3), size = 1, colour = 'dimgrey') + 
-    geom_line(aes(x = (1:length(resid1)), y = resid1 - 20), size = 1, colour = 'darkgray') + 
+  d1 <- ggplot(aes(x = x, y= y), data = NULL) + xlab("Index") + ylab("Depth") + ggtitle("Normalized Mark Decomposition") + 
+    geom_line(data=data.frame(x = 1:length(as.vector(y1)), y = as.vector(y1)+15), size = 1) + 
+    geom_line(data=data.frame(x = (1:length(y1smooth)), y = y1smooth - 3), size = 1, colour = 'dimgrey') + 
+    geom_line(data=data.frame(x = (1:length(resid1)), y = resid1 - 20), size = 1, colour = 'darkgray') + 
     theme(plot.title = element_text(hjust = 0.5))
   
-  d2 <- ggplot2::ggplot() + xlab("Index") + ylab("Depth") + ggtitle("Normalized Mark Decomposition") + 
-    geom_line(aes(x = 1:length(y2), y = y2+15), size = 1) + 
-    geom_line(aes(x = (1:length(y2smooth)), y = y2smooth - 3), size = 1, colour = 'dimgrey') + 
-    geom_line(aes(x = (1:length(resid2)), y = resid2 - 20), size = 1, colour = 'darkgray') + 
+  d2 <- ggplot(aes(x = x, y=y), data = NULL) + xlab("Index") + ylab("Depth") + ggtitle("Normalized Mark Decomposition") + 
+    geom_line(data=data.frame(x = 1:length(y2), y = y2+15), size = 1) + 
+    geom_line(data=data.frame(x = (1:length(y2smooth)), y = y2smooth - 3), size = 1, colour = 'dimgrey') + 
+    geom_line(data=data.frame(x = (1:length(resid2)), y = resid2 - 20), size = 1, colour = 'darkgray') + 
     theme(plot.title = element_text(hjust = 0.5))
   
   ##################################################
