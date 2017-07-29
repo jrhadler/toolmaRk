@@ -1,0 +1,20 @@
+Package: toolmaRk
+Type: Package
+Title: Implement tour methods in pure R code
+Version: 0.0.1
+Date: 2017-07-29
+Authors@R: c(person("Jeremy", "Hadler", role = c("aut", "cre"),
+                      email = "jrhadler@iastate.edu"),
+                      person("Max", "Morris", role = "ctb"), person("Heike",
+                      "Hofmann", role = "ctb"))
+Author: Jeremy Hadler [aut, cre], Max Morris [ctb], Heike Hofmann  [ctb]
+Maintainer: Jeremy Hadler <jrhadler@iastate.edu>
+Description: Implements tests for same-source of toolmarks.
+Depends: R (>= 3.3),
+         plyr (>= 1.8.4),
+         dplyr (>= 0.7.2),
+         ggplot2 (>= 2.2.1),
+         reshape2 (>= 1.4.2)
+License: GPL-3
+LazyData: true
+RoxygenNote: 6.0.1
