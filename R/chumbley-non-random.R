@@ -16,8 +16,6 @@
 #' \item {U} observed U statistic
 #' \item {p_value} Corresponding p-value
 #' }
-#' @examples 
-#' results <- chumbley_non_random(y_1, y_2, window_opt = 500, window_val = 50, coarse = .25)
 chumbley_non_random <- function(data1, data2, window_opt = 500, window_val = 50, coarse = .25){
 
   unity <- function(x) {x / sqrt(sum(x^2))} ## normalize columns of a matrix to make correlation computation faster

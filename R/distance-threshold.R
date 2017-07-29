@@ -36,6 +36,8 @@
 #'  \item{"threshold_plot"} threshold_plot
 #'  }
 fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window.size = .6, M = 500){
+## initialize variables
+  x <- y <- corr <- NULL
   
 #  source("F:/MaxAngleStudy/Phd Thesis/multiplot.r")
   

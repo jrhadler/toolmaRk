@@ -13,8 +13,8 @@ Description: Implements tests for same-source of toolmarks.
 Depends: R (>= 3.3),
          plyr (>= 1.8.4),
          dplyr (>= 0.7.2),
-         ggplot2 (>= 2.2.1),
          reshape2 (>= 1.4.2)
+Imports: ggplot2 (>= 2.2.1)         
 License: GPL-3
 LazyData: true
 RoxygenNote: 6.0.1

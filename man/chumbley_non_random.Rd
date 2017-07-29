@@ -31,6 +31,3 @@ list with
 This function computes the Chumbley U-Statistic on systemically chosen pairs of windows rather 
 than the original method which selects randomly chosen pairs of windows
 }
-\examples{
-results <- chumbley_non_random(y_1, y_2, window_opt = 500, window_val = 50, coarse = .25)
-}
