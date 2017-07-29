@@ -28,8 +28,8 @@
 #'  \item{"thresh_pval"} threshold p-value
 #'  \item{"Above"} Number of offsets with correlation bigger than threshold
 #'  \item{"total_thresh"} 2*M+1
-#'  \item{"mark1_decompostion"} d1
-#'  \item{"mark2_decompostion"} d2
+#'  \item{"mark1_decompostion"} plot of decomposition d1
+#'  \item{"mark2_decompostion"} plot of decomposition d2
 #'  \item{"class_correlations"} plot of class correlation
 #'  \item{"individual_correlations"} plot of individual correlation
 #'  \item{"distance_plot"} distance_plot
