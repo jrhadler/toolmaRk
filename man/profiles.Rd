@@ -10,7 +10,7 @@ pr1 and pr2 are known matches, all other pairs of profiles are known non-matches
 profiles
 }
 \description{
-Example data to try out the functions
+Simulated example data to try out the functions
 }
 \examples{
 data(profiles)
