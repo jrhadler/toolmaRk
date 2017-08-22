@@ -1,6 +1,7 @@
 #' Toolmark profiles dataset
 #' 
 #' Data set of toolmarks (profiles) created by screwdrivers under different angles. 
+#' Tool mark data included here were produced by Prof. Scott Chumbley, Mr. Stephen Davis, Ms. Taylor Grieve, Mr. Ryan Spotts, and Dr. Jeremy Hadler. These data were produced as part of research performed at the Ames Laboratory, located on the Iowa State University campus. Ames Laboratory is operated for the U.S. Department of Energy by Iowa State University under Contract No. DE-Ac02-07CH11358.
 #' @format the dataset consists of a sample of 16 toolmark profiles and descriptors. Toolmarks with the same toolmark identifier are known matches, all other profiles are known non-matches.
 #' \describe{
 #'   \item{ID}{toolmark identifier. Factor variable.}
