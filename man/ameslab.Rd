@@ -10,6 +10,7 @@
   \item{side}{A or B, indicates the side of the screwdriverused to create the toolmark. Factor variable. }
   \item{angle}{degree under which the toolmark was created.}
   \item{rep}{replicate number for a toolmark, side, angle composition. Note that the data here provided is not complete. For a more complete data set or more information please contact the references given below.}
+  \item{profile}{list of data sets with one profile each. Measurements are taken at equispaced intervals across the toolmark. .}
 }}
 \usage{
 ameslab
