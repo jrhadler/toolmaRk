@@ -9,6 +9,7 @@
 #' @param coarse smoothing parameter for the normalization smooth
 #' @importFrom stats pnorm
 #' @importFrom ggplot2 ggplot
+#' @export
 #' @return list with
 #' \itemize{
 #' \item {same_shift_n} Number of same shift offsets used
