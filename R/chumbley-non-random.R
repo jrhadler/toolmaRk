@@ -147,7 +147,6 @@ chumbley_non_random <- function(data1, data2, window_opt = 500, window_val = 50,
     obs_U <- t1
     
   }
-  
   pval <- 1 - pnorm(obs_U)
   
   list(same_shift_n = n, ##Number of same shift offsets used
