@@ -2,9 +2,9 @@ Package: toolmaRk
 Type: Package
 Title: Tests for Same-Source of Toolmarks
 Version: 0.0.1
-Date: 2017-10-04
+Date: 2018-01-10
 Authors@R: c(person("Jeremy", "Hadler", role = c("aut", "cre"),
-                      email = "jrhadler@iastate.edu"),
+                      email = "hadler13@yahoo.com"),
                       person("Max", "Morris", role = "ths"), person("Heike",
                       "Hofmann", role = "ctb"))
 Author: Jeremy Hadler [aut, cre], Max Morris [ths], Heike Hofmann  [ctb]
