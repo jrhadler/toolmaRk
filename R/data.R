@@ -22,7 +22,7 @@
 #'     res14 <- fixed_width_no_modeling(data.frame(ameslab$profile[[1]][1:1500,]), data.frame(ameslab$profile[[4]][1:1500,]), M = 200)
 #'     res14$dist_pval
 #'    }
-#'   \donttest{
+#'   donttest{
 #'     data(ameslab)
 #'     plot(ameslab$profile[[1]]$V1)
 #'     chumbley_non_random(ameslab$profile[[1]], ameslab$profile[[2]])
