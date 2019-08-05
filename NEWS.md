@@ -2,6 +2,7 @@
 
 - added documentation and website
 - removed plyr dependency in favor of dplyr
+- removed reshape2 dependency
 
 # toolmaRk 0.0.1
 

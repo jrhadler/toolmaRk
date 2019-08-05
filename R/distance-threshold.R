@@ -88,7 +88,7 @@ fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window
   ##Compute the correlations between all pairs of windows
   ##Rows in the following matrix are mark 2, columns are mark 1
   corr_mat_smooth <- t(smooth2_mat) %*% smooth1_mat
-  browser()
+
   ##Melt the matrix to three columns
   melt_corr_mat_smooth <- as.data.frame.table(corr_mat_smooth)
   names(melt_corr_mat_smooth) <- c('row', 'col', 'corr')

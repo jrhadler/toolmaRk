@@ -81,7 +81,92 @@
 <a href="#getting-started" class="anchor"></a>Getting Started</h1>
 <p>Load the library</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(toolmaRk)</a></code></pre></div>
-<p>Load a dataset …</p>
+<div id="load-a-dataset" class="section level2">
+<h2 class="hasAnchor">
+<a href="#load-a-dataset" class="anchor"></a>Load a dataset</h2>
+<p>The <code>ameslab</code> dataset provided with the package is data collected by Prof. Scott Chumbley, Mr. Stephen Davis, Ms. Taylor Grieve, Mr. Ryan Spotts, and Dr. Jeremy Hadler (Ames Laboratory, US DoE, Contract No. DE-Ac02-07CH11358). The data consists of 16 profiles from 7 different tool (T2, T4, T6, T7, T9, T10, and T11). Profiles from the same tool are considered to be same-source, profiles from different tools are different-source marks.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"ameslab"</span>)</a></code></pre></div>
+</div>
+<div id="a-first-look-at-toolmark-profiles" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-first-look-at-toolmark-profiles" class="anchor"></a>A first look at toolmark profiles</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a></code></pre></div>
+<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.0.9000     ✔ readr   1.3.1     
+## ✔ tibble  2.1.3          ✔ purrr   0.3.2     
+## ✔ tidyr   0.8.3          ✔ stringr 1.4.0     
+## ✔ ggplot2 3.2.0.9000     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
+<a class="sourceLine" id="cb9-2" title="2">ameslab<span class="op">$</span>id &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(ameslab)</a>
+<a class="sourceLine" id="cb9-3" title="3">ameslab &lt;-<span class="st"> </span>ameslab <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">data =</span> profile <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="dt">.f =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb9-6" title="6">      <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(x) &lt;-<span class="st"> "profile"</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      x<span class="op">$</span>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(x)</a>
+<a class="sourceLine" id="cb9-8" title="8">      x</a>
+<a class="sourceLine" id="cb9-9" title="9">  }))</a>
+<a class="sourceLine" id="cb9-10" title="10"></a>
+<a class="sourceLine" id="cb9-11" title="11">ameslab_long &lt;-<span class="st"> </span>ameslab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span>(data) </a>
+<a class="sourceLine" id="cb9-12" title="12"></a>
+<a class="sourceLine" id="cb9-13" title="13">ameslab_long <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(ID<span class="op">==</span><span class="st">"T10"</span>, side <span class="op">==</span><span class="st"> "A"</span>, angle<span class="op">==</span><span class="dv">50</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> profile)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(id))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="st">  </span><span class="kw">scale_colour_brewer</span>(<span class="dt">name=</span><span class="st">"Toolmark"</span>, <span class="dt">type=</span><span class="st">"qual"</span>)</a></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p>The profiles of the two tools look very similar. We can now test for same-sourceness.</p>
+</div>
+<div id="testing-same-sourceness" class="section level2">
+<h2 class="hasAnchor">
+<a href="#testing-same-sourceness" class="anchor"></a>Testing same-sourceness</h2>
+<p>The tests in <code>toolmaRk</code> are set up using the null hypothesis of different source, i.e. the basic assumption is that two profiles were made by different tools. The alternative hypothesis is therefore ‘same tool’.</p>
+<div id="non-random-chumbley" class="section level3">
+<h3 class="hasAnchor">
+<a href="#non-random-chumbley" class="anchor"></a>non-random Chumbley</h3>
+<p>Using a non-random Chumbley U statistic (Hadler and Morris, 2017), we find strong evidence against different source:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="reference/chumbley_non_random.html">chumbley_non_random</a></span>(</a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(ameslab<span class="op">$</span>profile[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">2000</span>,]), </a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(ameslab<span class="op">$</span>profile[[<span class="dv">2</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">2000</span>,]))</a></code></pre></div>
+<pre><code>## $same_shift_n
+## [1] 28
+## 
+## $diff_shift_n
+## [1] 24
+## 
+## $U
+## [1] 3.340715
+## 
+## $p_value
+## [1] 0.0004178146</code></pre>
+<p>The p-value of 0.0004 is very indicative of rejecting different-source (null hypothesis) in favor of same-source (alternative hypothesis).</p>
+</div>
+<div id="distancethreshold-test-for-toolmarks" class="section level3">
+<h3 class="hasAnchor">
+<a href="#distancethreshold-test-for-toolmarks" class="anchor"></a>Distance/threshold test for toolmarks</h3>
+<p>Both the distance and the threshold test for toolmarks (Hadler 2016) provide similar evidence:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">res11 &lt;-<span class="st"> </span><span class="kw"><a href="reference/fixed_width_no_modeling.html">fixed_width_no_modeling</a></span>(</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(ameslab<span class="op">$</span>profile[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">1250</span>,]),</a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(ameslab<span class="op">$</span>profile[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">1250</span>,]), <span class="dt">M =</span> <span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb12-4" title="4">res11<span class="op">$</span>dist_pval</a></code></pre></div>
+<pre><code>## [1] 0.0025</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">res11<span class="op">$</span>thresh_pval</a></code></pre></div>
+<pre><code>## [1] 0.0025</code></pre>
+<p>The p-values again indicate to reject the null hypothesis of same-sourceness in favor of the alternative of different sourceness.</p>
+</div>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h1>
+<ul>
+<li>Hadler J. R. and Morris M.D., An Improved Version of a Tool Mark Comparison Algorithm. J Forensic Sci, 2017, vol. 63 (3), 2 pp. 849-855. <a href="http://doi.wiley.com/10.1111/1556-4029.13640" class="uri">http://doi.wiley.com/10.1111/1556-4029.13640</a>
+</li>
+<li>Hadler, J. R., Forensic tool mark comparisons: Tests for the null hypothesis of different sources, Graduate Theses and Dissertations, Iowa State University, 2017, <a href="https://lib.dr.iastate.edu/etd/15312/" class="uri">https://lib.dr.iastate.edu/etd/15312/</a>
+</li>
+</ul>
 </div>
   </div>
 
