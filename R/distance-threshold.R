@@ -14,7 +14,6 @@
 #' @param M search area restriction
 #' @importFrom dplyr filter group_by summarise 
 #' @importFrom stats lowess
-#' @importFrom reshape2 melt
 #' @importFrom ggplot2 aes xlab ylab geom_vline geom_hline coord_fixed element_text ggtitle
 #' @importFrom ggplot2 geom_line theme geom_raster geom_path geom_point scale_fill_gradient
 #' @export
@@ -89,10 +88,12 @@ fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window
   ##Compute the correlations between all pairs of windows
   ##Rows in the following matrix are mark 2, columns are mark 1
   corr_mat_smooth <- t(smooth2_mat) %*% smooth1_mat
-  
+  browser()
   ##Melt the matrix to three columns
-  melt_corr_mat_smooth <- melt(corr_mat_smooth)
+  melt_corr_mat_smooth <- as.data.frame.table(corr_mat_smooth)
   names(melt_corr_mat_smooth) <- c('row', 'col', 'corr')
+  melt_corr_mat_smooth$row <- as.integer(melt_corr_mat_smooth$row)
+  melt_corr_mat_smooth$col <- as.integer(melt_corr_mat_smooth$col)
   
   ##Determine the pair of windows resulting in the maximized correlation
   ##Eliminate the first and last M columns from consideration
@@ -164,8 +165,11 @@ fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window
   
   ##Convert the correlation matrix to the long format so it can be plotted and pull out just the elements in the diamond region
   corr_mat_resid <- t(resid2_mat) %*% resid1_mat
-  melt_corr_mat_resid <- melt(corr_mat_resid)
+  melt_corr_mat_resid <- as.data.frame.table(corr_mat_resid)
   names(melt_corr_mat_resid) <- c('row', 'col', 'corr')
+  melt_corr_mat_resid$row <- as.integer(melt_corr_mat_resid$row)
+  melt_corr_mat_resid$col <- as.integer(melt_corr_mat_resid$col)
+  
   melt_diamond <- merge(diamond, melt_corr_mat_resid, by = c('row', 'col'))
   
   ##Define the corners of the search diamond for easy plotting
