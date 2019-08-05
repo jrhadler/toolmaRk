@@ -12,9 +12,8 @@
 #' @param fine decomposition smoothing parameter
 #' @param window.size desired window size for the correlations to compute 
 #' @param M search area restriction
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter group_by summarise 
 #' @importFrom stats lowess
-#' @importFrom plyr ddply summarise . 
 #' @importFrom reshape2 melt
 #' @importFrom ggplot2 aes xlab ylab geom_vline geom_hline coord_fixed element_text ggtitle
 #' @importFrom ggplot2 geom_line theme geom_raster geom_path geom_point scale_fill_gradient
@@ -135,7 +134,14 @@ fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window
   
   ##Add a data point to the bottom of each column on the left side of center
   diamond_left_of_center <- dplyr::filter(diamond, col - max_corr_smooth$col < 0)
-  diamond_added_points <- ddply(diamond_left_of_center, .(col), summarise, row = min(row) - 1)
+  # diamond_added_points <- diamond_left_of_center %>%
+  #   group_by(col) %>%
+  #   summarise(
+  #     row = min(row) - 1
+  #     )
+  ## line below is equivalent to the above statement without using the pipe operator
+  diamond_added_points <- summarise(group_by(diamond_left_of_center, col), row = min(row) - 1)
+  
   diamond <- as.matrix(rbind(diamond, diamond_added_points))
   
   ###############################################################################
@@ -181,7 +187,14 @@ fixed_width_no_modeling <- function(dat1, dat2, coarse = .25, fine = .01, window
   
   ##Determine the offset at each location and compute the max correlation along each offset
   melt_diamond$diag <- melt_diamond$row - melt_diamond$col
-  melt_diamond_summary <- ddply(melt_diamond, .(diag), summarise, max = max(corr), count = length(corr))
+  # melt_diamond_summary <- melt_diamond %>% group_by(diag) %>%
+  #   summarise(
+  #     max = max(corr), 
+  #     count = length(corr))
+  ## w/o the pipe this becomes less readable:
+  melt_diamond_summary <- summarise(group_by(melt_diamond, diag), 
+                                    max = max(corr), count = length(corr))
+  
   max_melt_diamond_summary <- melt_diamond_summary[which.max(melt_diamond_summary$max), ]
   
   ##Distance P-value
