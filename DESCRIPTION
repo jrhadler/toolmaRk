@@ -17,4 +17,4 @@ Depends: R (>= 3.3),
 Imports: ggplot2 (>= 2.2.1)         
 License: GPL-3
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

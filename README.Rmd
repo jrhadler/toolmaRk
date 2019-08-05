@@ -1,13 +1,15 @@
 ---
 title: "toolmaRk - R package for same-source toolmark matching"
 author: "Jeremy Hadler, Heike Hofmann"
-date: "August 05, 2019"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   html_document:
     keep_md: true
 ---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 Were two striation marks made by the same tool or by different tools? The R package toolmaRk provides a range of statistical tests for that.
 
@@ -20,16 +22,14 @@ Were two striation marks made by the same tool or by different tools? The R pack
 
 `toolmaRk` is available from CRAN:
 
-
-```r
+```{r, eval = FALSE}
 install.packages("toolmaRk")
 ```
 
 
 The development version of `toolmaRk` is available from Github:
 
-
-```r
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("jrhadler/toolmaRk", build_vignettes = TRUE)
 ```
@@ -38,45 +38,8 @@ devtools::install_github("jrhadler/toolmaRk", build_vignettes = TRUE)
 
 Load the library
 
-
-```r
+```{r, message = FALSE, warning = FALSE}
 library(toolmaRk)
-```
-
-```
-## Loading required package: plyr
-```
-
-```
-## Loading required package: dplyr
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:plyr':
-## 
-##     arrange, count, desc, failwith, id, mutate, rename, summarise,
-##     summarize
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```
-## Loading required package: reshape2
 ```
 
 Load a dataset ...
