@@ -1,7 +1,7 @@
 ---
 title: "toolmaRk - R package for same-source toolmark matching"
 author: "Jeremy Hadler, Heike Hofmann"
-date: "August 05, 2019"
+date: "August 06, 2019"
 output: 
   html_document:
     keep_md: true
@@ -9,10 +9,12 @@ output:
 
 
 
-Were two striation marks made by the same tool or by different tools? The R package toolmaRk provides a range of statistical tests for that.
+## Were two striation marks made by the same tool or by different tools?
 
-[![CRAN Status](http://www.r-pkg.org/badges/version/toolmaRk)](https://cran.r-project.org/package=toolmaRk) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/toolmaRk)](http://www.r-pkg.org/pkg/toolmaRk) 
+The R package toolmaRk provides a range of statistical tests for that.
 
+[![CRAN Status](http://www.r-pkg.org/badges/version/toolmaRk)](https://cran.r-project.org/package=toolmaRk) 
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/toolmaRk)](http://www.r-pkg.org/pkg/toolmaRk) 
 [![Travis-CI Build Status](https://travis-ci.org/jrhadler/toolmaRk.svg?branch=master)](https://travis-ci.org/jrhadler/toolmaRk)
 
 
@@ -57,26 +59,6 @@ data("ameslab")
 
 ```r
 library(tidyverse)
-```
-
-```
-## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
-```
-
-```
-## ✔ ggplot2 3.2.0.9000     ✔ readr   1.3.1     
-## ✔ tibble  2.1.3          ✔ purrr   0.3.2     
-## ✔ tidyr   0.8.3          ✔ stringr 1.4.0     
-## ✔ ggplot2 3.2.0.9000     ✔ forcats 0.4.0
-```
-
-```
-## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-```
-
-```r
 library(tidyr)
 ameslab$id <- 1:nrow(ameslab)
 ameslab <- ameslab %>% 
@@ -104,7 +86,9 @@ The profiles of the two tools look very similar. We can now test for same-source
 
 The tests in `toolmaRk` are set up using the null hypothesis of different source, i.e. the basic assumption is that two profiles were made by  different tools. The alternative hypothesis is therefore 'same tool'. 
 
-Using a non-random Chumbley score (Hadler and Morris, 2017):
+### non-random Chumbley
+
+Using a non-random Chumbley U statistic (Hadler and Morris, 2017), we find strong evidence against different source:
 
 
 ```r
@@ -129,7 +113,31 @@ chumbley_non_random(
 
 The p-value of 0.0004 is very indicative of rejecting different-source (null hypothesis) in favor of same-source (alternative hypothesis).
 
+### Distance/threshold test for toolmarks
 
+Both the distance and the threshold test for toolmarks (Hadler 2016) provide similar evidence:
+
+
+```r
+res11 <- fixed_width_no_modeling(
+  data.frame(ameslab$profile[[1]][1:1250,]),
+  data.frame(ameslab$profile[[1]][1:1250,]), M = 200)
+res11$dist_pval
+```
+
+```
+## [1] 0.0025
+```
+
+```r
+res11$thresh_pval
+```
+
+```
+## [1] 0.0025
+```
+
+The p-values again indicate to reject the null hypothesis of same-sourceness in favor of the alternative of different sourceness.
 
 # References
 
